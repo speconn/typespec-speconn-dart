@@ -269,11 +269,11 @@ function emitDart(program: Program, services: ServiceInfo[], outputDir: string):
       const reqName = rpc.inputType?.name || "Object";
       const resName = rpc.outputType?.name || "Object";
       if (rpc.isStream) {
-        client.push(`  Stream<${resName}> ${rpc.name}(${reqName} input, {CallOptions? options}) =>`);
-        client.push(`      _client.stream('${rpc.path}', input.toJson(), ${resName}.fromJson, options: options);`);
+        client.push(`  Stream<${resName}> ${rpc.name}(${reqName} input, {Map<String, String> headers = const {}}) =>`);
+        client.push(`      _client.stream('${rpc.path}', input.toJson(), ${resName}.fromJson, headers: headers);`);
       } else {
-        client.push(`  Future<${resName}> ${rpc.name}(${reqName} input, {CallOptions? options}) =>`);
-        client.push(`      _client.call('${rpc.path}', input.toJson(), ${resName}.fromJson, options: options);`);
+        client.push(`  Future<${resName}> ${rpc.name}(${reqName} input, {Map<String, String> headers = const {}}) =>`);
+        client.push(`      _client.call('${rpc.path}', input.toJson(), ${resName}.fromJson, headers: headers);`);
       }
     }
     client.push('  void close() => _client.close();');
