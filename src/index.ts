@@ -263,8 +263,8 @@ function emitDart(program: Program, services: ServiceInfo[], outputDir: string):
     client.push(`import '${typesImport}';\n`);
     client.push(`class ${svc.serviceName}Client {`);
     client.push(`  final UnaryClient _client;`);
-    client.push(`  ${svc.serviceName}Client(String baseUrl, {Transport? transport})`);
-    client.push(`      : _client = UnaryClient(baseUrl, transport: transport);`);
+    client.push(`  ${svc.serviceName}Client(String baseUrl, {HttpClient? httpClient})`);
+    client.push(`      : _client = UnaryClient(baseUrl, httpClient: httpClient);`);
     for (const rpc of svc.rpcs) {
       const reqName = rpc.inputType?.name || "Object";
       const resName = rpc.outputType?.name || "Object";
