@@ -276,7 +276,6 @@ function emitDart(program: Program, services: ServiceInfo[], outputDir: string):
         client.push(`      _client.call('${rpc.path}', input.toJson(), ${resName}.fromJson, headers: headers);`);
       }
     }
-    client.push('  void close() => _client.close();');
     client.push('}\n');
 
     promises.push(emitFile(program, { path: `${outputDir}/${fn.types}`, content: types.join("\n") }));
